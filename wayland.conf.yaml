@@ -1,0 +1,9 @@
+- defaults:
+	link:
+		create: true
+		relink: true
+
+- link:
+	~/.sway/config:
+	~/.sway/i3blocks.conf:
+	~/.gitconfig:

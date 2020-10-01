@@ -1,0 +1,180 @@
+# 						Sway config
+#							lekonjak
+
+# 						vars
+
+	set $mod Mod4
+	set $term termite
+	
+	# vim like direction keys
+	set $left h
+	set $down j
+	set $up k
+	set $right l
+	
+	# application laucher set
+	set $menu /usr/bin/rofi | rofi -show run | xargs swaymsg exec --
+
+# 						outputs
+
+	output eDP-1 res 2560x1440 scale 1
+	# wallpaper
+	output * bg ~/.sway/mountain.gif fill
+	#output HDMI-A-2 res 1920x1080
+
+#						font for window titles
+	font pango:texgyreheros-regular 22
+
+#						key bindings
+
+	# start a terminal
+	bindsym $mod+Return exec $term
+	
+	# lock the computer
+	bindsym $mod+z exec lock
+	
+	# kill focused window
+	bindsym $mod+Shift+q kill
+	
+	# start your launcher
+	bindsym $mod+d exec $menu 
+
+	# use Mouse+$mod to drag floating windows to their wanted position
+	floating_modifier $mod 
+
+	# reload the configuration file
+	bindsym $mod+Shift+c reload
+
+	# exit sway
+	bindsym $mod+Shift+e exec swaynag -t warning -m 'Exit?' -b 'Y' 'swaymsg exit'"
+	
+	# audio controls (volume up, volume down, toggle mute)
+	bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+    && pkill -SIGRTMIN+3 i3blocks
+	bindsym XF86AudioLowerVolume exec amixer -q set Master 5%-    && pkill -SIGRTMIN+3 i3blocks
+	bindsym XF86AudioMute        exec amixer -q set Master toggle && pkill -SIGRTMIN+3 i3blocks
+	
+	# screen brightness controls (brightness up, brightness down)
+	bindsym XF86MonBrightnessUp exec brightnessctl set +5% 
+	bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+	
+#						moving around
+
+	# moving focus 
+	bindsym $mod+$left focus left
+	bindsym $mod+$down focus down
+	bindsym $mod+$up focus up
+	bindsym $mod+$right focus right
+	# alt w/ arrow keys
+	bindsym $mod+Left focus left
+	bindsym $mod+Down focus down
+	bindsym $mod+Up focus up
+	bindsym $mod+Right focus right
+	
+	# moving focused window 
+	bindsym $mod+Shift+$left move left
+	bindsym $mod+Shift+$down move down
+	bindsym $mod+Shift+$up move up
+	bindsym $mod+Shift+$right move right
+	# alt w/ arrow keys
+	bindsym $mod+Shift+Left move left
+	bindsym $mod+Shift+Down move down
+	bindsym $mod+Shift+Up move up
+	bindsym $mod+Shift+Right move right	
+
+# 						layout stuff
+
+	# setting default border size	
+	default_border pixel 1
+	# split in horizontal/vertical
+	bindsym $mod+b splith
+	bindsym $mod+v splitv
+	
+	# enter fullscreen mode for the focused container
+	bindsym $mod+f fullscreen 
+	
+	# change container layout (stacked, tabbed, toggle split)
+	bindsym $mod+s layout stacking
+	bindsym $mod+w layout tabbed
+	bindsym $mod+e layout toggle split
+	
+	# toggle tiling / floating
+	bindsym $mod+Shift+space floating toggle
+	
+	# change focus between tiling / floating windows
+	bindsym $mod+space focus mode_toggle
+	
+	# focus the parent container
+	bindsym $mod+a focus parent
+	
+	# focus the child container
+	bindsym $mod+Shift+a focus child
+	
+#						workspaces
+
+	# switch to workspace
+	bindsym $mod+1 workspace 1
+	bindsym $mod+2 workspace 2
+	bindsym $mod+3 workspace 3
+	bindsym $mod+4 workspace 4
+	bindsym $mod+5 workspace 5
+	bindsym $mod+6 workspace 6
+	bindsym $mod+7 workspace 7
+	bindsym $mod+8 workspace 8
+	bindsym $mod+9 workspace 9
+	bindsym $mod+0 workspace 10
+
+	# move focused container to workspace
+	bindsym $mod+Shift+1 move container to workspace 1
+	bindsym $mod+Shift+2 move container to workspace 2
+	bindsym $mod+Shift+3 move container to workspace 3
+	bindsym $mod+Shift+4 move container to workspace 4
+	bindsym $mod+Shift+5 move container to workspace 5
+	bindsym $mod+Shift+6 move container to workspace 6
+	bindsym $mod+Shift+7 move container to workspace 7
+	bindsym $mod+Shift+8 move container to workspace 8
+	bindsym $mod+Shift+9 move container to workspace 9
+	bindsym $mod+Shift+0 move container to workspace 10
+
+	# alt tab equivalent 
+	bindsym $mod+Tab workspace back_and_forth
+
+# 						resize window
+	mode "resize" {
+	        # These bindings trigger as soon as you enter the resize mode
+	
+	        bindsym $left       resize shrink width 10 px or 10 ppt
+	        bindsym $down       resize grow height 10 px or 10 ppt
+	        bindsym $up         resize shrink height 10 px or 10 ppt
+	        bindsym $right      resize grow width 10 px or 10 ppt
+		# alt w/ arrow keys
+	        bindsym Left        resize shrink width 10 px or 10 ppt
+	        bindsym Down        resize grow height 10 px or 10 ppt
+	        bindsym Up          resize shrink height 10 px or 10 ppt
+	        bindsym Right       resize grow width 10 px or 10 ppt
+	
+	        # back to normal: Enter or Escape
+	        bindsym Return mode "default"
+	        bindsym Escape mode "default"
+	}
+	bindsym $mod+r mode "resize"
+
+# 						workspace bar 
+	bar {
+	        position top
+	        status_command i3blocks -c ~/.sway/i3blocks.conf 
+	}
+	
+#						input handling
+	# keyboard layout toogle
+	input type:keyboard {
+		xkb_layout br,us
+		xkb_options grp:shifts_toggle 
+	}
+
+#						scratchpad
+	# move focused window to scratchpad
+	bindsym $mod+Shift+minus move scratchpad
+	# show next scratchpad window	
+	bindsym $mod+minus scratchpad show
+
+include /etc/sway/config.d/*	

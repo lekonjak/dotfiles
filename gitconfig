@@ -1,0 +1,7 @@
+[user]
+	email = ricardodogc@gmail.com
+	name = Ricardo A. Araujo
+[core]
+	editor = vim
+[commit]
+	gpgsign = true
