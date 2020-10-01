@@ -1,9 +1,9 @@
 - defaults:
-	link:
-		create: true
-		relink: true
+    link:
+        create: true
+        relink: true
 
 - link:
-	~/.sway/config:
-	~/.sway/i3blocks.conf:
-	~/.config/termite/config: termite
+    ~/.sway/config:
+    ~/.sway/i3blocks.conf:
+    ~/.config/termite/config: termite
