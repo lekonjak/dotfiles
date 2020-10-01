@@ -6,3 +6,4 @@
 - link:
 	~/.sway/config:
 	~/.sway/i3blocks.conf:
+	~/.config/termite/config: termite
